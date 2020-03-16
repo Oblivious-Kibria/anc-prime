@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_20dp"
+        android:layout_marginTop="@dimen/value_15dp"
+        android:layout_marginBottom="@dimen/value_15dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Sales Flow (monthly)"
+        android:textColor="@color/color_text_normal_black"
+        android:textSize="@dimen/value_20dp" />
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/sales_report_line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/values_240dp"
+        android:layout_marginStart="@dimen/value_10dp"
+        android:layout_marginEnd="@dimen/value_10dp" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_20dp"
+        android:layout_marginTop="@dimen/value_25dp"
+        android:layout_marginBottom="@dimen/value_15dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Best Selling Products (monthly)"
+        android:textColor="@color/color_text_normal_black"
+        android:textSize="@dimen/value_20dp" />
+
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/top_selling_product_chart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/values_240dp"
+        android:layout_marginStart="@dimen/value_10dp"
+        android:layout_marginEnd="@dimen/value_10dp" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_20dp"
+        android:layout_marginTop="@dimen/value_25dp"
+        android:layout_marginBottom="@dimen/value_15dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Least Selling Products (monthly)"
+        android:textColor="@color/color_text_normal_black"
+        android:textSize="@dimen/value_20dp" />
+
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/least_selling_product_chart"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/values_240dp"
+        android:layout_marginStart="@dimen/value_10dp"
+        android:layout_marginEnd="@dimen/value_10dp" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_20dp"
+        android:layout_marginTop="@dimen/value_25dp"
+        android:layout_marginBottom="@dimen/value_15dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Top Customers (monthly)"
+        android:textColor="@color/color_text_normal_black"
+        android:textSize="@dimen/value_20dp" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_order_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/value_30dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/value_15dp"
+        android:paddingEnd="@dimen/value_20dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="12"
+        tools:listitem="@layout/item_top_customer" />
+
+</LinearLayout>

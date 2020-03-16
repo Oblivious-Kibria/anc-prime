@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetEnd="@layout/main_activity_content_end"
+        app:constraintSetStart="@layout/main_activity_content_start"
+        app:duration="500">
+
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:touchAnchorId="@id/rl_details_view"
+            app:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="30"
+                motion:motionTarget="@id/include_layout_dashboard" />
+
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="50"
+                motion:motionTarget="@id/tv_title" />
+
+<!--            <KeyAttribute-->
+<!--                android:alpha="0"-->
+<!--                motion:framePosition="50"-->
+<!--                motion:motionTarget="@id/ll_drag" />-->
+
+
+<!--            <KeyAttribute-->
+<!--                android:alpha="0"-->
+<!--                motion:framePosition="50"-->
+<!--                motion:motionTarget="@id/ll_profile_info" />-->
+
+
+        </KeyFrameSet>
+
+    </Transition>
+
+
+<!--        <ConstraintSet android:id="@+id/start">-->
+
+<!--            <Constraint-->
+<!--                android:id="@+id/guideline_2"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintGuide_percent=".3"/>-->
+
+
+<!--        </ConstraintSet>-->
+
+<!--        <ConstraintSet android:id="@+id/end">-->
+
+<!--            <Constraint-->
+<!--                android:id="@+id/guideline_2"-->
+<!--                android:orientation="horizontal"-->
+<!--                -->
+<!--                app:layout_constraintGuide_percent="0.0"/>-->
+
+<!--        </ConstraintSet>-->
+
+</MotionScene>

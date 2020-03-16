@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/main_activity_motion_scene">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/include_layout_dashboard"
+        android:layout_width="@dimen/value_0dp"
+        android:layout_height="@dimen/value_0dp"
+        android:alpha="1"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/guideline_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_sales_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/value_20dp"
+                android:layout_marginTop="@dimen/value_25dp"
+                android:layout_toStartOf="@+id/power_spinner"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Sales Summary"
+                android:textColor="@color/color_text_normal_black"
+                android:textSize="@dimen/text_size_24sp" />
+
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/power_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/value_25dp"
+                android:layout_marginEnd="@dimen/value_15dp"
+                android:background="@drawable/shape_round_stroke"
+                android:gravity="center"
+                android:hint="This Week"
+                android:minWidth="110dp"
+                android:paddingStart="@dimen/value_10dp"
+                android:paddingTop="@dimen/value_3dp"
+                android:paddingEnd="@dimen/value_5dp"
+                android:paddingBottom="@dimen/value_3dp"
+                android:textColor="@color/color_text_normal_black"
+                android:textColorHint="@color/color_text_deep_gray_1"
+                android:textSize="@dimen/text_size_14sp"
+                app:drawableTint="@color/color_notification_title"
+                app:spinner_arrow_animate="true"
+                app:spinner_arrow_gravity="end"
+                app:spinner_arrow_padding="5dp"
+                app:spinner_arrow_show="true"
+                app:spinner_divider_color="@color/white"
+                app:spinner_divider_show="true"
+                app:spinner_divider_size="@dimen/value_2dp"
+                app:spinner_item_array="@array/time_range"
+                app:spinner_popup_animation="dropdown"
+                app:spinner_popup_background="@color/white"
+                app:spinner_popup_elevation="@dimen/value_14dp" />
+
+        </RelativeLayout>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/value_120dp"
+                android:layout_weight="2">
+
+                <com.razerdp.widget.animatedpieview.AnimatedPieView
+                    android:id="@+id/pie_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/value_10dp"
+                android:layout_marginEnd="@dimen/value_10dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/value_2dp"
+                    android:gravity="center|start"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/value_8dp"
+                        android:layout_height="@dimen/value_8dp"
+                        android:background="@drawable/shape_circle"
+                        android:backgroundTint="@color/pie_color_1" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_sale_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/value_5dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Sale 100 k"
+                        android:textColor="@color/color_text_normal_black"
+                        android:textSize="@dimen/text_size_14sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/value_2dp"
+                    android:gravity="center|start"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/value_8dp"
+                        android:layout_height="@dimen/value_8dp"
+                        android:background="@drawable/shape_circle"
+                        android:backgroundTint="@color/pie_color_2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_vat_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/value_5dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Vat 85 k"
+                        android:textColor="@color/color_text_normal_black"
+                        android:textSize="@dimen/text_size_14sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|start"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/value_8dp"
+                        android:layout_height="@dimen/value_8dp"
+                        android:background="@drawable/shape_circle"
+                        android:backgroundTint="@color/pie_color_4" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_discount_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/value_5dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Discount 5k"
+                        android:textColor="@color/color_text_normal_black"
+                        android:textSize="@dimen/text_size_14sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/value_40dp"
+            android:layout_marginEnd="@dimen/value_30dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/value_2dp"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/value_8dp"
+                    android:layout_height="@dimen/value_8dp"
+                    android:background="@drawable/shape_circle"
+                    android:backgroundTint="@color/color_deep_1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_account_receivable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/value_5dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="Receivable 100 k"
+                    android:textColor="@color/color_text_normal_black"
+                    android:textSize="@dimen/text_size_16sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/value_2dp"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/value_8dp"
+                    android:layout_height="@dimen/value_8dp"
+                    android:background="@drawable/shape_circle"
+                    android:backgroundTint="@color/color_deep_4" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_paid_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/value_5dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="Paid 85 k"
+                    android:textColor="@color/color_text_normal_black"
+                    android:textSize="@dimen/text_size_16sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/value_8dp"
+                    android:layout_height="@dimen/value_8dp"
+                    android:background="@drawable/shape_circle"
+                    android:backgroundTint="@color/color_deep_0" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_due_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/value_5dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="Due 5k"
+                    android:textColor="@color/color_text_normal_black"
+                    android:textSize="@dimen/text_size_16sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".4" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_drawer_menu"
+        android:layout_width="@dimen/value_24dp"
+        android:layout_height="@dimen/value_24dp"
+        android:layout_marginStart="@dimen/value_16dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_1"
+        app:srcCompat="@drawable/ic_menu" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_25dp"
+        android:alpha="0"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Dashboard"
+        android:textColor="@color/color_text_normal_black"
+        android:textSize="@dimen/text_size_20sp"
+        app:layout_constraintBottom_toTopOf="@id/guideline_2"
+        app:layout_constraintStart_toEndOf="@id/iv_drawer_menu"
+        app:layout_constraintTop_toBottomOf="@id/guideline_1" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_graph"
+        android:layout_width="@dimen/value_24dp"
+        android:layout_height="@dimen/value_24dp"
+        android:layout_marginEnd="@dimen/value_12dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline_2"
+        app:layout_constraintEnd_toStartOf="@id/iv_options"
+        app:layout_constraintTop_toBottomOf="@id/guideline_1"
+        app:srcCompat="@drawable/ic_graph" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_options"
+        android:layout_width="@dimen/value_16dp"
+        android:layout_height="@dimen/value_16dp"
+        android:layout_marginEnd="@dimen/value_12dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_1"
+        app:srcCompat="@drawable/ic_menu_dots" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".48" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/rl_details_view"
+        android:layout_width="@dimen/value_0dp"
+        android:layout_height="@dimen/value_0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_2">
+
+        <include layout="@layout/main_activity_details_content" />
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

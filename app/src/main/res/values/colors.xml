@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <color name="colorPrimary">#0055DC</color>
+    <color name="colorPrimaryDark">#0055DC</color>
+    <color name="colorAccent">#0055DC</color>
+    <color name="text_color_deep_ash">#717171</color>
+    <color name="text_color_lite_ash">#A8A5A6</color>
+    <color name="text_color_white">#ffffff</color>
+    <color name="color_green">#2BB256</color>
+    <color name="color_notification_title">#777777</color>
+    <color name="color_notification_message">#BFBFBF</color>
+    <color name="color_circular_blue">#518ADF</color>
+    <color name="color_vertical_line">#F4F4F5</color>
+    <color name="color_circular_pink">#FF6285</color>
+    <color name="color_circular_green">#36B75E</color>
+    <color name="color_list_border">#ECECEC</color>
+    <color name="color_yellow">#FF9800</color>
+    <color name="color_yellow_light">#FCE1AB</color>
+    <color name="color_border_bg">#EAEAF1</color>
+    <color name="color_text_light_green">#7BD470</color>
+    <color name="color_border_bg_lite_gray">#CCCCCC</color>
+    <color name="color_ash_bg">#cccccc</color>
+    <color name="color_vertical_border_light_green">#B5FDCB</color>
+    <color name="color_vertical_border_deep_green">#53CA77</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_grey">#a9a9a9</color>
+    <color name="color_lite_white">#ECEBEB</color>
+
+    <color name="color_border_vertical_0">#4789D4</color>
+    <color name="color_border_vertical_1">#F3A758</color>
+    <color name="color_border_vertical_2">#8A85EA</color>
+    <color name="color_text_prime_lite">#1D405D</color>
+    <color name="color_text_normal_black">#222222</color>
+    <color name="color_text_prime_deep">#0E202E</color>
+
+    <color name="black">#000000</color>
+    <color name="grey">#a9a9a9</color>
+    <color name="red">#d32f2f</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+
+
+    <color name="color_light_0">#F4D2D2</color>
+    <color name="color_deep_0">#E76668</color>
+
+    <color name="color_light_1">#BDE8DA</color>
+    <color name="color_deep_1">#12A66F</color>
+
+    <color name="color_light_2">#C9E1F6</color>
+    <color name="color_deep_2">#48A3F6</color>
+
+    <color name="color_light_3">#F4E3CB</color>
+    <color name="color_deep_3">#F3AD4C</color>
+
+    <color name="color_light_4">#DFCDFA</color>
+    <color name="color_deep_4">#9E52FE</color>
+
+    <color name="color_light_5">#C6DAEC</color>
+    <color name="color_deep_5">#3583D1</color>
+    <color name="color_list_bg">#F2F4F5</color>
+    <color name="color_pest">#03D293</color>
+    <color name="color_gray">#DBDBDB</color>
+    <color name="color_orange">#F4511E</color>
+
+
+    <color name="firstCircleColor">#C9CFDB</color>
+    <color name="secondCircleColor">#D7DBE4</color>
+    <color name="thirdCircleColor">#E2E5EB</color>
+    <color name="fourthCircleColor">#F2F3F5</color>
+    <color name="fifthCircleColor">#ffffff</color>
+
+
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/color_text_light_gray_1</color>
+    <color name="color_sub_text">#BEC0C9</color>
+    <color name="color_text_header">#404658</color>
+
+
+    <color name="color_tas">#00000030</color>
+
+
+
+    <color name="text_enabled">#FFFFFFFF</color>
+    <color name="text_disabled">#4DFFFFFF</color>
+
+
+    <color name="medium_text_enabled">#FF000000</color>
+    <color name="medium_text_disabled">#4D000000</color>
+
+
+    <color name="color_text_light_gray_1">#A5A4A4</color>
+    <color name="color_text_light_gray_2">#E0E0E0</color>
+    <color name="color_text_deep_gray_1">#737070</color>
+    <color name="color_text_deep_gray_2">#4B4B4B</color>
+    <color name="color_green_bright">#25BB63</color>
+
+
+
+    <color name="color_status_0">#E9F8F1</color>
+    <color name="color_status_1">#EFEBFA</color>
+    <color name="color_status_2">#FDEDF0</color>
+
+
+    <color name="text_color_status_0">#46C192</color>
+    <color name="text_color_status_1">#7266E4</color>
+    <color name="text_color_status_2">#F3718F</color>
+
+
+
+    <color name="color_esp_profile_icons">#01CC91</color>
+    <color name="color_canceled">#F44336</color>
+
+    <color name="text_color_pest_light">#DAF6EB</color>
+    <color name="text_color_pest_deep">#2DC79E</color>
+    <color name="color_text_deep_pink">#FE8C90</color>
+
+
+    <color name="color_selected_item_bg">#F1FCF8</color>
+
+    <color name="color_text_input_layout_box_stroke">#000000</color>
+
+    <color name="pie_color_1">#0064FF</color>
+    <color name="pie_color_2">#3ED599</color>
+    <color name="pie_color_3">#FF974B</color>
+    <color name="pie_color_4">#FFC542</color>
+
+    <color name="color_trim">#85000000</color>
+    <color name="color_line_graph_border">#6476D3</color>
+
+</resources>
+
+
+
