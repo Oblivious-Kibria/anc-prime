@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/main_activity_motion_scene">
-
+    //app:layoutDescription="@xml/main_activity_motion_scene"
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/include_layout_dashboard"
@@ -264,8 +264,8 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-
         </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -277,6 +277,17 @@
         app:layout_constraintGuide_percent=".4" />
 
 
+    <View
+        android:id="@+id/toolbar_shadow_view"
+        android:layout_width="@dimen/value_0dp"
+        android:layout_height="@dimen/value_1dp"
+        android:background="@drawable/tool_bar_shadow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:alpha="0"
+        app:layout_constraintTop_toBottomOf="@id/guideline_2"/>
+
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_drawer_menu"
         android:layout_width="@dimen/value_24dp"
@@ -284,6 +295,7 @@
         android:layout_marginStart="@dimen/value_16dp"
         app:layout_constraintBottom_toTopOf="@id/guideline_2"
         app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@id/guideline_1"
         app:srcCompat="@drawable/ic_menu" />
 
@@ -340,7 +352,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_2">
+        app:layout_constraintTop_toBottomOf="@id/toolbar_shadow_view">
 
         <include layout="@layout/main_activity_details_content" />
 

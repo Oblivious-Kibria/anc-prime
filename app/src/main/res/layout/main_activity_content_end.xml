@@ -269,12 +269,24 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0" />
+
+
+    <View
+        android:id="@+id/toolbar_shadow_view"
+        android:layout_width="@dimen/value_0dp"
+        android:layout_height="@dimen/value_1dp"
+        android:alpha="1"
+        android:background="@drawable/tool_bar_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_2" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -340,7 +352,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline_2">
+        app:layout_constraintTop_toBottomOf="@id/toolbar_shadow_view">
 
         <include layout="@layout/main_activity_details_content" />
 

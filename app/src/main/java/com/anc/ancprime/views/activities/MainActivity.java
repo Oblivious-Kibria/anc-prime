@@ -24,6 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anc.ancprime.R;
 import com.anc.ancprime.data.constants.AppConstants;
 import com.anc.ancprime.data.model.ApiResponse;
+import com.anc.ancprime.data.model.products.LeastFiveProducts;
+import com.anc.ancprime.data.model.products.ProductSummaryResponse;
+import com.anc.ancprime.data.model.products.TopFiveProducts;
 import com.anc.ancprime.data.model.summary.LastDay;
 import com.anc.ancprime.data.model.summary.LastMonth;
 import com.anc.ancprime.data.model.summary.LastWeek;
@@ -35,7 +38,8 @@ import com.anc.ancprime.views.adapters.Customer;
 import com.anc.ancprime.views.adapters.TopCustomerListAdapter;
 import com.anc.ancprime.views.utils.MyNumberFormatter;
 import com.anc.ancprime.views.utils.MyXAxisValueFormatter;
-import com.anc.ancprime.views.utils.XYMarkerView;
+import com.anc.ancprime.views.utils.XYMarkerViewLeastProducts;
+import com.anc.ancprime.views.utils.XYMarkerViewTopProducts;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -123,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private LineChart mSalesReportChart;
-    private BarChart mTopSellingProductChart, mLeastSellingProductChart;
     private MainActivityViewModel viewModel;
     private SummaryChartData summaryChartData;
 
@@ -147,7 +150,11 @@ public class MainActivity extends AppCompatActivity {
     private void initViewModel() {
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         viewModel.loadSalesSummary();
-        viewModel.getApiResponse().observe(this, apiResponse -> {
+        viewModel.loadProductSummary();
+        viewModel.getSalesSummaryResponse().observe(this, apiResponse -> {
+            consumeResponse(apiResponse);
+        });
+        viewModel.getProductSummaryResponse().observe(this, apiResponse -> {
             consumeResponse(apiResponse);
         });
     }
@@ -166,12 +173,33 @@ public class MainActivity extends AppCompatActivity {
 
             case SUCCESS:
                 //hideProgressBar();
-                SalesSummaryResponse response = (SalesSummaryResponse) apiResponse.data;
-                if (response != null && response.getStatus()) {
-                    summaryChartData = response.getData();
-                    setPieChartData(response.getData().getLastWeek(), AppConstants.SEARCH_CATEGORY_THIS_WEEK);
-                } else if (response != null) {
-                    Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+                switch (apiResponse.requestType) {
+                    case AppConstants.REQUEST_TYPE_SALES_SUMMARY:
+                        SalesSummaryResponse salesSummaryResponse = (SalesSummaryResponse) apiResponse.data;
+                        if (salesSummaryResponse != null && salesSummaryResponse.getStatus()) {
+                            summaryChartData = salesSummaryResponse.getData();
+                            setPieChartData(salesSummaryResponse.getData().getLastWeek(), AppConstants.SEARCH_CATEGORY_THIS_WEEK);
+                        } else if (salesSummaryResponse != null) {
+                            Toast.makeText(this, salesSummaryResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    case AppConstants.REQUEST_TYPE_PRODUCT_SUMMARY:
+                        ProductSummaryResponse productSummaryResponse = (ProductSummaryResponse) apiResponse.data;
+                        if (productSummaryResponse != null && productSummaryResponse.getStatus()) {
+                            List<TopFiveProducts> topFiveProducts = productSummaryResponse.getData().getLastMonth().getTop5Product();
+                            List<LeastFiveProducts> leastFiveProducts = productSummaryResponse.getData().getLastMonth().getLow5Product();
+                            if (topFiveProducts != null && topFiveProducts.size() > 0) {
+                                setTopSellingProducts(topFiveProducts);
+                            }
+
+                            if (leastFiveProducts != null && leastFiveProducts.size() > 0) {
+                                setLeastSellingProducts(leastFiveProducts);
+                            }
+                        } else if (productSummaryResponse != null) {
+                            Toast.makeText(this, productSummaryResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        break;
                 }
                 break;
 
@@ -197,7 +225,6 @@ public class MainActivity extends AppCompatActivity {
         float discount = 0f;
         float vat = 0f;
         float receivable = 0f;
-
 
 
         if (category.equalsIgnoreCase(AppConstants.SEARCH_CATEGORY_TODAY)) {
@@ -231,8 +258,8 @@ public class MainActivity extends AppCompatActivity {
         tvDiscountValue.setText("Discount " + MyNumberFormatter.format(discount));
 
         tvAccountReceivable.setText("Receivable " + MyNumberFormatter.format(receivable));
-        tvPaidValue.setText("Paid "+MyNumberFormatter.format(paid));
-        tvDueValue.setText("Due "+MyNumberFormatter.format(due));
+        tvPaidValue.setText("Paid " + MyNumberFormatter.format(paid));
+        tvDueValue.setText("Due " + MyNumberFormatter.format(due));
 
 
         AnimatedPieViewConfig config = new AnimatedPieViewConfig();
@@ -259,8 +286,6 @@ public class MainActivity extends AppCompatActivity {
     private void intiView() {
         initDrawerLayout();
         setSalesReportChart();
-        setTopSellingProducts();
-        setLeastSellingProducts();
         initAdapter();
         initSpinner();
     }
@@ -437,29 +462,25 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void setTopSellingProducts() {
-        mTopSellingProductChart = findViewById(R.id.top_selling_product_chart);
-
-        mTopSellingProductChart.setDrawBarShadow(false);
-        mTopSellingProductChart.setDrawValueAboveBar(true);
-
-        mTopSellingProductChart.getDescription().setEnabled(false);
-        mTopSellingProductChart.setPinchZoom(true);
-
-        mTopSellingProductChart.setDrawGridBackground(false);
+    private void setTopSellingProducts(List<TopFiveProducts> topFiveProductList) {
+        topSellingProductChart.setDrawBarShadow(false);
+        topSellingProductChart.setDrawValueAboveBar(true);
+        topSellingProductChart.getDescription().setEnabled(false);
+        topSellingProductChart.setPinchZoom(true);
+        topSellingProductChart.setDrawGridBackground(false);
 
 
-        XAxis xAxis = mTopSellingProductChart.getXAxis();
+        XAxis xAxis = topSellingProductChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
         xAxis.setGranularity(1f);
-        xAxis.setLabelCount(5);
+        xAxis.setLabelCount(topFiveProductList.size());
         xAxis.setTextColor(R.color.color_text_light_gray_1);
 
 
-        YAxis leftAxis = mTopSellingProductChart.getAxisLeft();
-        leftAxis.setLabelCount(6, true);
+        YAxis leftAxis = topSellingProductChart.getAxisLeft();
+        leftAxis.setLabelCount(topFiveProductList.size() + 1, true);
         leftAxis.setValueFormatter(new LargeValueFormatter());
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(0f);
@@ -467,43 +488,38 @@ public class MainActivity extends AppCompatActivity {
         leftAxis.setAxisMinimum(0f);
         leftAxis.setTextColor(R.color.color_text_light_gray_1);
 
-        YAxis rightAxis = mTopSellingProductChart.getAxisRight();
+        YAxis rightAxis = topSellingProductChart.getAxisRight();
         rightAxis.setEnabled(false);
 
-        XYMarkerView mv = new XYMarkerView(this, new LargeValueFormatter());
-        mv.setChartView(mTopSellingProductChart); // For bounds control
-        mTopSellingProductChart.setMarker(mv);
-
-        setDataForTopSellingProducts(5, 500000f);
-    }
+        XYMarkerViewTopProducts mv = new XYMarkerViewTopProducts(this, new LargeValueFormatter(), topFiveProductList);
+        mv.setChartView(topSellingProductChart); // For bounds control
+        topSellingProductChart.setMarker(mv);
 
 
-
-
-    private void setDataForTopSellingProducts(int count, float range) {
-
-        float start = 1f;
+        /***
+         * Setting data for bar chart;
+         */
+        int start = 1;
+        int count = topFiveProductList.size();
 
         ArrayList<BarEntry> values = new ArrayList<>();
 
-        for (int i = (int) start; i < start + count; i++) {
-            float val = (float) (Math.random() * (range + 1));
-
-            if (Math.random() * 100 < 25) {
-                values.add(new BarEntry(i, val, null));
-            } else {
-                values.add(new BarEntry(i, val));
-            }
+        for (int i = start; i < start + count; i++) {
+            TopFiveProducts topFiveProduct = topFiveProductList.get(i-1);
+            float unitPrice = topFiveProduct.getUnitPrice();
+            int quantity = Integer.valueOf(topFiveProduct.getQuantity());
+            float totalPrice = unitPrice * quantity;
+            values.add(new BarEntry(i, totalPrice));
         }
 
         BarDataSet set1;
 
-        if (mTopSellingProductChart.getData() != null &&
-                mTopSellingProductChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) mTopSellingProductChart.getData().getDataSetByIndex(0);
+        if (topSellingProductChart.getData() != null &&
+                topSellingProductChart.getData().getDataSetCount() > 0) {
+            set1 = (BarDataSet) topSellingProductChart.getData().getDataSetByIndex(0);
             set1.setValues(values);
-            mTopSellingProductChart.getData().notifyDataChanged();
-            mTopSellingProductChart.notifyDataSetChanged();
+            topSellingProductChart.getData().notifyDataChanged();
+            topSellingProductChart.notifyDataSetChanged();
 
         } else {
             set1 = new BarDataSet(values, "");
@@ -529,37 +545,35 @@ public class MainActivity extends AppCompatActivity {
             data.setBarWidth(0.9f);
             data.setValueFormatter(new LargeValueFormatter());
 
-            mTopSellingProductChart.setData(data);
+            topSellingProductChart.setData(data);
         }
-        mTopSellingProductChart.invalidate();
+        topSellingProductChart.invalidate();
     }
 
 
 
 
-    private void setLeastSellingProducts() {
-        mLeastSellingProductChart = findViewById(R.id.least_selling_product_chart);
+    private void setLeastSellingProducts(List<LeastFiveProducts> leastFiveProductList) {
+        leastSellingProductChart.setDrawBarShadow(false);
+        leastSellingProductChart.setDrawValueAboveBar(true);
 
-        mLeastSellingProductChart.setDrawBarShadow(false);
-        mLeastSellingProductChart.setDrawValueAboveBar(true);
+        leastSellingProductChart.getDescription().setEnabled(false);
+        leastSellingProductChart.setPinchZoom(true);
 
-        mLeastSellingProductChart.getDescription().setEnabled(false);
-        mLeastSellingProductChart.setPinchZoom(true);
-
-        mLeastSellingProductChart.setDrawGridBackground(false);
+        leastSellingProductChart.setDrawGridBackground(false);
 
 
-        XAxis xAxis = mLeastSellingProductChart.getXAxis();
+        XAxis xAxis = leastSellingProductChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
         xAxis.setGranularity(1f);
-        xAxis.setLabelCount(5);
+        xAxis.setLabelCount(leastFiveProductList.size());
         xAxis.setTextColor(R.color.color_text_light_gray_1);
 
 
-        YAxis leftAxis = mLeastSellingProductChart.getAxisLeft();
-        leftAxis.setLabelCount(6, true);
+        YAxis leftAxis = leastSellingProductChart.getAxisLeft();
+        leftAxis.setLabelCount(leastFiveProductList.size() + 1, true);
         leftAxis.setValueFormatter(new LargeValueFormatter());
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(0f);
@@ -567,43 +581,37 @@ public class MainActivity extends AppCompatActivity {
         leftAxis.setAxisMinimum(0f);
         leftAxis.setTextColor(R.color.color_text_light_gray_1);
 
-        YAxis rightAxis = mLeastSellingProductChart.getAxisRight();
+        YAxis rightAxis = leastSellingProductChart.getAxisRight();
         rightAxis.setEnabled(false);
 
-        XYMarkerView mv = new XYMarkerView(this, new LargeValueFormatter());
-        mv.setChartView(mLeastSellingProductChart); // For bounds control
-        mLeastSellingProductChart.setMarker(mv);
-
-        setDataForLeastSellingProducts(5, 500000f);
-    }
+        XYMarkerViewLeastProducts mv = new XYMarkerViewLeastProducts(this, new LargeValueFormatter(), leastFiveProductList);
+        mv.setChartView(leastSellingProductChart); // For bounds control
+        leastSellingProductChart.setMarker(mv);
 
 
-
-
-    private void setDataForLeastSellingProducts(int count, float range) {
-
-        float start = 1f;
-
+        /***
+         * Setting data for bar chart;
+         */
+        int start = 1;
+        int count = leastFiveProductList.size();
         ArrayList<BarEntry> values = new ArrayList<>();
 
-        for (int i = (int) start; i < start + count; i++) {
-            float val = (float) (Math.random() * (range + 1));
-
-            if (Math.random() * 100 < 25) {
-                values.add(new BarEntry(i, val, null));
-            } else {
-                values.add(new BarEntry(i, val));
-            }
+        for (int i = start; i < start + count; i++) {
+            LeastFiveProducts leastFiveProduct = leastFiveProductList.get(i-1);
+            float unitPrice = leastFiveProduct.getUnitPrice();
+            int quantity = Integer.valueOf(leastFiveProduct.getQuantity());
+            float totalPrice = unitPrice * quantity;
+            values.add(new BarEntry(i, totalPrice));
         }
 
         BarDataSet set1;
 
-        if (mLeastSellingProductChart.getData() != null &&
-                mLeastSellingProductChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) mLeastSellingProductChart.getData().getDataSetByIndex(0);
+        if (leastSellingProductChart.getData() != null &&
+                leastSellingProductChart.getData().getDataSetCount() > 0) {
+            set1 = (BarDataSet) leastSellingProductChart.getData().getDataSetByIndex(0);
             set1.setValues(values);
-            mLeastSellingProductChart.getData().notifyDataChanged();
-            mLeastSellingProductChart.notifyDataSetChanged();
+            leastSellingProductChart.getData().notifyDataChanged();
+            leastSellingProductChart.notifyDataSetChanged();
 
         } else {
             set1 = new BarDataSet(values, "");
@@ -629,9 +637,9 @@ public class MainActivity extends AppCompatActivity {
             data.setBarWidth(0.9f);
             data.setValueFormatter(new LargeValueFormatter());
 
-            mLeastSellingProductChart.setData(data);
+            leastSellingProductChart.setData(data);
         }
-        mLeastSellingProductChart.invalidate();
+        leastSellingProductChart.invalidate();
     }
 
 

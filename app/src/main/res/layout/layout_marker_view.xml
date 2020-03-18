@@ -3,22 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/value_180dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/marker2"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="Overdraw">
+
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvContent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/value_80dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:padding="@dimen/value_8dp"
         android:text="Ok kk"
+        android:gravity="center"
         android:textSize="@dimen/text_size_16sp"
         android:textColor="@color/white"
         android:ellipsize="end"
+        android:background="@drawable/shape_round_rec"
         android:fontFamily="@font/roboto_light" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/value_35dp"
+        android:layout_height="@dimen/value_25dp"
+        android:layout_marginTop="-5dp"
+        android:layout_below="@id/tvContent"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_down_arrow"/>
 
 </RelativeLayout>
 

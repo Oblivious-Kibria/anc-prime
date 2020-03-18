@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.anc.ancprime.R;
+import com.anc.ancprime.data.constants.AppConstants;
 import com.anc.ancprime.data.model.ApiResponse;
 import com.anc.ancprime.data.networking.Repository;
 
@@ -20,14 +21,15 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by User on 3/15/2020.
  */
-public class MainActivityViewModel  extends AndroidViewModel {
+public class MainActivityViewModel extends AndroidViewModel {
 
 
     private Repository repository;
     private CompositeDisposable disposable = new CompositeDisposable();
     private String apiToken;
-    private int espId;
-    private MutableLiveData<ApiResponse> mutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<ApiResponse> salesSummaryMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<ApiResponse> productSummaryMutableLiveData = new MutableLiveData<>();
+
 
 
 
@@ -45,15 +47,15 @@ public class MainActivityViewModel  extends AndroidViewModel {
         disposable.add(repository.executeSalesSummaryRequest(apiToken)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable1 -> mutableLiveData.setValue(ApiResponse.loading(null)))
+                .doOnSubscribe(disposable1 -> salesSummaryMutableLiveData.setValue(ApiResponse.loading(AppConstants.REQUEST_TYPE_SALES_SUMMARY)))
                 .subscribe(
                         response -> {
                             Log.d("ApiTesting", "onSuccess " + response.getMessage());
-                            mutableLiveData.setValue(ApiResponse.success(response, null));
+                            salesSummaryMutableLiveData.setValue(ApiResponse.success(response, AppConstants.REQUEST_TYPE_SALES_SUMMARY));
                         },
                         throwable -> {
                             Log.d("ApiTesting", "onError " + throwable.toString());
-                            mutableLiveData.setValue(ApiResponse.error(throwable, null));
+                            salesSummaryMutableLiveData.setValue(ApiResponse.error(throwable, AppConstants.REQUEST_TYPE_SALES_SUMMARY));
                         }
                 ));
     }
@@ -61,8 +63,36 @@ public class MainActivityViewModel  extends AndroidViewModel {
 
 
 
-    public MutableLiveData<ApiResponse> getApiResponse() {
-        return mutableLiveData;
+    public void loadProductSummary() {
+        Log.d("ApiTesting", " ApiToken " + apiToken);
+        disposable.add(repository.executeTopAndLeastSellingProductRequest(apiToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable1 -> productSummaryMutableLiveData.setValue(ApiResponse.loading(AppConstants.REQUEST_TYPE_PRODUCT_SUMMARY)))
+                .subscribe(
+                        response -> {
+                            Log.d("ApiTesting", "onSuccess " + response.getMessage());
+                            productSummaryMutableLiveData.setValue(ApiResponse.success(response, AppConstants.REQUEST_TYPE_PRODUCT_SUMMARY));
+                        },
+                        throwable -> {
+                            Log.d("ApiTesting", "onError " + throwable.toString());
+                            productSummaryMutableLiveData.setValue(ApiResponse.error(throwable, AppConstants.REQUEST_TYPE_PRODUCT_SUMMARY));
+                        }
+                ));
+    }
+
+
+
+
+    public MutableLiveData<ApiResponse> getSalesSummaryResponse() {
+        return salesSummaryMutableLiveData;
+    }
+
+
+
+
+    public MutableLiveData<ApiResponse> getProductSummaryResponse() {
+        return productSummaryMutableLiveData;
     }
 
 

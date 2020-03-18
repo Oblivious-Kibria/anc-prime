@@ -16,6 +16,7 @@ public class HttpParams {
 
 
     public static final String SALES_SUMMARY_API = "sale-summary";
+    public static final String TOP_SELLING_AND_LEAST_SELLING_PRODUCT_API = "top-low-product";
 
 
 
