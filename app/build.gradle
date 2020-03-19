@@ -68,7 +68,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
 
-
     // Retrofit;
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.6.0'
@@ -83,11 +82,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
 
 
-
     // Butter-knife dependency injection of view;
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-
 
 
     // Shave of view library for circular image view;

@@ -8,12 +8,12 @@ public class Customer {
     String name;
     String image;
     String address;
-    String purchaseValue;
+    float purchaseValue;
 
 
 
 
-    public Customer(String name, String image, String address, String purchaseValue) {
+    public Customer(String name, String image, String address, float purchaseValue) {
         this.name = name;
         this.image = image;
         this.address = address;
@@ -68,14 +68,14 @@ public class Customer {
 
 
 
-    public String getPurchaseValue() {
+    public float getPurchaseValue() {
         return purchaseValue;
     }
 
 
 
 
-    public Customer setPurchaseValue(String purchaseValue) {
+    public Customer setPurchaseValue(float purchaseValue) {
         this.purchaseValue = purchaseValue;
         return this;
     }

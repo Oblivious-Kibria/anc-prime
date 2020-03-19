@@ -1,5 +1,6 @@
 package com.anc.ancprime.views.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -73,7 +74,7 @@ import butterknife.ButterKnife;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     @BindView(R.id.tv_sales_summary)
@@ -124,6 +125,14 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutCompat drawer;
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.toolbar_shadow_view)
+    View toolbarShadowView;
+    @BindView(R.id.ll_inventory)
+    LinearLayoutCompat llInventory;
+    @BindView(R.id.ll_customer)
+    LinearLayoutCompat llCustomer;
+    @BindView(R.id.ll_cash_due)
+    LinearLayoutCompat llCashDue;
 
 
     private LineChart mSalesReportChart;
@@ -142,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
         intiView();
         initViewModel();
+        initListeners();
     }
 
 
@@ -157,6 +167,15 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getProductSummaryResponse().observe(this, apiResponse -> {
             consumeResponse(apiResponse);
         });
+    }
+
+
+
+
+    private void initListeners() {
+        llInventory.setOnClickListener(this);
+        llCustomer.setOnClickListener(this);
+        llCashDue.setOnClickListener(this);
     }
 
 
@@ -505,7 +524,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<BarEntry> values = new ArrayList<>();
 
         for (int i = start; i < start + count; i++) {
-            TopFiveProducts topFiveProduct = topFiveProductList.get(i-1);
+            TopFiveProducts topFiveProduct = topFiveProductList.get(i - 1);
             float unitPrice = topFiveProduct.getUnitPrice();
             int quantity = Integer.valueOf(topFiveProduct.getQuantity());
             float totalPrice = unitPrice * quantity;
@@ -597,7 +616,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<BarEntry> values = new ArrayList<>();
 
         for (int i = start; i < start + count; i++) {
-            LeastFiveProducts leastFiveProduct = leastFiveProductList.get(i-1);
+            LeastFiveProducts leastFiveProduct = leastFiveProductList.get(i - 1);
             float unitPrice = leastFiveProduct.getUnitPrice();
             int quantity = Integer.valueOf(leastFiveProduct.getQuantity());
             float totalPrice = unitPrice * quantity;
@@ -648,11 +667,11 @@ public class MainActivity extends AppCompatActivity {
     private void initAdapter() {
         RecyclerView recyclerView = findViewById(R.id.rv_order_status);
         List<Customer> mArrayList = new ArrayList<>();
-        mArrayList.add(new Customer("United Hospital", "", "Gulshan", "90000"));
-        mArrayList.add(new Customer("Apollo Hospitals", "", "Gulshan", "70000"));
-        mArrayList.add(new Customer("Square Hospital", "", "Panthopath", "60000"));
-        mArrayList.add(new Customer("Labaid", "", "Gulshan", "50000"));
-        mArrayList.add(new Customer("Ibn Sina Hospital", "", "Dhanmondi", "55000"));
+        mArrayList.add(new Customer("United Hospital", "", "Gulshan", 90000));
+        mArrayList.add(new Customer("Apollo Hospitals", "", "Gulshan", 70000));
+        mArrayList.add(new Customer("Square Hospital", "", "Panthopath", 60000));
+        mArrayList.add(new Customer("Labaid", "", "Gulshan", 50000));
+        mArrayList.add(new Customer("Ibn Sina Hospital", "", "Dhanmondi", 55000));
 
 
         TopCustomerListAdapter mAdapter = new TopCustomerListAdapter(getApplicationContext(), mArrayList, new TopCustomerListAdapter.OnItemClickListener() {
@@ -666,5 +685,25 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
     }
 
+
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_inventory:
+                startActivity(new Intent(MainActivity.this, InventoryActivity.class));
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                break;
+            case R.id.ll_customer:
+                startActivity(new Intent(MainActivity.this, CustomerListActivity.class));
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                break;
+            case R.id.ll_cash_due:
+                startActivity(new Intent(MainActivity.this, CashDueActivity.class));
+                drawerLayout.closeDrawer(Gravity.LEFT);
+                break;
+        }
+    }
 
 }

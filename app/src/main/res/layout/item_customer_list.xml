@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/value_20dp">
+
+
+    <FrameLayout
+        android:id="@+id/fl_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.github.florent37.shapeofview.shapes.CircleView
+            android:layout_width="@dimen/value_50dp"
+            android:layout_height="@dimen/value_50dp"
+            app:shape_circle_borderColor="@color/black"
+            app:shape_circle_borderWidth="0.1dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_profile_pic"
+                android:layout_width="@dimen/value_50dp"
+                android:layout_height="@dimen/value_50dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/user_temp" />
+
+        </com.github.florent37.shapeofview.shapes.CircleView>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_authorized"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:visibility="visible">
+
+            <View
+                android:layout_width="@dimen/value_8dp"
+                android:layout_height="@dimen/value_8dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_product_pic"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_approved" />
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_customer_name"
+        android:layout_width="@dimen/value_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_16dp"
+        android:layout_marginTop="@dimen/value_15dp"
+        android:layout_marginEnd="@dimen/value_16dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Aminul Islam"
+        android:textColor="@color/color_text_prime_lite"
+        android:textSize="@dimen/text_size_15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fl_profile"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_customer_id"
+        android:layout_width="@dimen/value_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_16dp"
+        android:layout_marginTop="@dimen/value_5dp"
+        android:layout_marginEnd="@dimen/value_16dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Customer ID: 213"
+        android:textColor="@color/color_text_prime_lite"
+        android:textSize="@dimen/text_size_13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fl_profile"
+        app:layout_constraintTop_toBottomOf="@id/tv_customer_name" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_customer_address"
+        android:layout_width="@dimen/value_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/value_16dp"
+        android:layout_marginEnd="@dimen/value_16dp"
+        android:fontFamily="@font/roboto_light"
+        android:text="Address: 207, Road: 27/A, Dhanmondi, Dhaka -1209."
+        android:textColor="@color/color_text_deep_gray_1"
+        android:textSize="@dimen/text_size_13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/fl_profile"
+        app:layout_constraintTop_toBottomOf="@id/tv_customer_id" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_dashboard"
+        android:layout_width="@dimen/value_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/value_15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_customer_address"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cl_two"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="0"
+                android:textColor="@color/color_green"
+                android:textSize="@dimen/text_size_18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_payment_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_payment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="Payments"
+                android:textColor="#88B5FD"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_payment" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cl_one"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_due"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="0"
+                android:textColor="@color/color_green"
+                android:textSize="@dimen/text_size_18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/tv_due_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_due_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="Due"
+                android:textColor="#88B5FD"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_due" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+        android:id="@+id/view_space"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/value_8dp"
+        android:layout_marginTop="@dimen/value_20dp"
+        android:background="@color/color_list_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_dashboard" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

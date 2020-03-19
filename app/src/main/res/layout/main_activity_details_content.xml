@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,16 +7,33 @@
     android:orientation="vertical">
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/value_20dp"
         android:layout_marginTop="@dimen/value_15dp"
-        android:layout_marginBottom="@dimen/value_15dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Sales Flow (monthly)"
-        android:textColor="@color/color_text_normal_black"
-        android:textSize="@dimen/value_20dp" />
+        android:layout_marginBottom="@dimen/value_25dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_20dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="Sales Flow"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/value_20dp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="(monthly)"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/value_14dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <com.github.mikephil.charting.charts.LineChart
@@ -27,16 +44,33 @@
         android:layout_marginEnd="@dimen/value_10dp" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/value_20dp"
         android:layout_marginTop="@dimen/value_25dp"
-        android:layout_marginBottom="@dimen/value_15dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Best Selling Products (monthly)"
-        android:textColor="@color/color_text_normal_black"
-        android:textSize="@dimen/value_20dp" />
+        android:layout_marginBottom="@dimen/value_25dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_20dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="Best Selling Products"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/value_20dp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="(monthly)"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/value_14dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <com.github.mikephil.charting.charts.BarChart
@@ -47,16 +81,33 @@
         android:layout_marginEnd="@dimen/value_10dp" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/value_20dp"
         android:layout_marginTop="@dimen/value_25dp"
-        android:layout_marginBottom="@dimen/value_15dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Least Selling Products (monthly)"
-        android:textColor="@color/color_text_normal_black"
-        android:textSize="@dimen/value_20dp" />
+        android:layout_marginBottom="@dimen/value_25dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_20dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="Least Selling Products"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/value_20dp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="(monthly)"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/value_14dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <com.github.mikephil.charting.charts.BarChart
@@ -67,16 +118,33 @@
         android:layout_marginEnd="@dimen/value_10dp" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/value_20dp"
         android:layout_marginTop="@dimen/value_25dp"
-        android:layout_marginBottom="@dimen/value_15dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Top Customers (monthly)"
-        android:textColor="@color/color_text_normal_black"
-        android:textSize="@dimen/value_20dp" />
+        android:layout_marginBottom="@dimen/value_25dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_20dp"
+            android:fontFamily="@font/roboto_light"
+            android:textStyle="bold"
+            android:text="Top Customers"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/value_20dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="(monthly)"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/value_14dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -92,4 +160,4 @@
         tools:itemCount="12"
         tools:listitem="@layout/item_top_customer" />
 
-</LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

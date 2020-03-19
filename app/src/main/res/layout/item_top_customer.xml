@@ -1,82 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:cardCornerRadius="@dimen/value_8dp"
+    app:cardUseCompatPadding="true"
+    android:layout_margin="@dimen/value_4dp"
+    android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:layout_width="160dp"
-        android:minHeight="@dimen/value_120dp"
-        android:layout_height="@dimen/value_120dp"
-        android:background="@drawable/shape_round_rectangle"
-        android:elevation="@dimen/value_1dp"
-        android:layout_margin="@dimen/value_10dp"
+        android:layout_width="@dimen/value_150dp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/value_140dp"
         android:orientation="vertical">
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="User Name"
-            android:layout_marginStart="@dimen/value_8dp"
-            android:textSize="@dimen/text_size_14sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="@dimen/value_10dp"
-            android:layout_toStartOf="@id/cv_profile_pic"
-            android:fontFamily="@font/roboto_light"
-            android:textColor="@color/color_text_normal_black"
-            android:maxLines="2"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="User address"
-            android:layout_marginStart="@dimen/value_8dp"
-            android:textSize="@dimen/text_size_13sp"
-            android:layout_below="@id/tv_name"
-            android:fontFamily="@font/roboto_light"
-            android:textColor="@color/color_text_deep_gray_1"
-            android:maxLines="2"/>
-
 
         <com.github.florent37.shapeofview.shapes.CircleView
             android:id="@+id/cv_profile_pic"
             android:layout_width="@dimen/value_40dp"
             android:layout_height="@dimen/value_40dp"
-            app:shape_circle_borderColor="@color/grey"
-            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/value_8dp"
-            app:shape_circle_borderWidth="1dp">
+            app:shape_circle_borderColor="@color/grey"
+            app:shape_circle_borderWidth="0.5dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_profile_pic"
-                android:layout_width="@dimen/value_40dp"
-                android:layout_height="@dimen/value_40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_place_holder_user_image_small" />
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/user_temp" />
 
         </com.github.florent37.shapeofview.shapes.CircleView>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cv_profile_pic"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:layout_marginEnd="@dimen/value_10dp"
+            android:layout_marginTop="@dimen/value_10dp"
+            android:layout_marginBottom="@dimen/value_3dp"
+            android:fontFamily="@font/roboto_light"
+            android:maxLines="2"
+            android:gravity="center"
+            android:textColor="@color/color_text_normal_black"
+            android:textSize="@dimen/text_size_14sp"
+            tools:text="User Name" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:layout_marginEnd="@dimen/value_10dp"
+            android:fontFamily="@font/roboto_light"
+            android:maxLines="2"
+            android:gravity="center"
+            android:textColor="@color/color_text_deep_gray_1"
+            android:textSize="@dimen/text_size_13sp"
+            tools:text="User address" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_purchase_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            tools:text="20,000"
+            android:layout_below="@id/tv_address"
+            android:layout_marginTop="@dimen/value_10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:layout_marginEnd="@dimen/value_10dp"
             android:layout_marginBottom="@dimen/value_10dp"
-            android:layout_marginTop="@dimen/value_20dp"
-            android:layout_marginStart="@dimen/value_8dp"
-            android:textSize="@dimen/text_size_20sp"
             android:fontFamily="@font/roboto_light"
-            android:textColor="@color/color_orange"
-            android:maxLines="2"/>
+            android:maxLines="2"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/color_green_bright"
+            android:textSize="@dimen/text_size_20sp"
+            tools:text="20,000" />
 
     </RelativeLayout>
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>

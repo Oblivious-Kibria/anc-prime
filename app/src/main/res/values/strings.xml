@@ -10,6 +10,6 @@
     </array>
 
     <string name="currency_sign">\u09F3</string>
-    <string name="cash_due"><![CDATA[Cash & Due]]></string>
+    <string name="cash_due"><![CDATA[cash & due]]></string>
     <string name="api_token">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC80My4yMjUuMTUxLjI1Mzo5N1wvYXBpXC9zclwvdl8wXzBfMVwvZG8tbG9naW4iLCJpYXQiOjE1ODQzMzkwMjMsImV4cCI6MTU4Njk2NzAyMywibmJmIjoxNTg0MzM5MDIzLCJqdGkiOiJndkxnN3lScTRvZzVDb1ZuIiwic3ViIjoxMSwicHJ2IjoiODdlMGFmMWVmOWZkMTU4MTJmZGVjOTcxNTNhMTRlMGIwNDc1NDZhYSJ9.50hbJQE9B1mQlSqDbgdRR3yQHmiePIKs25wfVq-w-gU</string>
 </resources>

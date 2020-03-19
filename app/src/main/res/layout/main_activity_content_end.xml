@@ -30,9 +30,10 @@
                 android:layout_marginStart="@dimen/value_20dp"
                 android:layout_marginTop="@dimen/value_25dp"
                 android:layout_toStartOf="@+id/power_spinner"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/roboto_light"
+                android:textStyle="bold"
                 android:text="Sales Summary"
-                android:textColor="@color/color_text_normal_black"
+                android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_size_24sp" />
 
             <com.skydoves.powerspinner.PowerSpinnerView
@@ -119,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/value_5dp"
                         android:fontFamily="@font/roboto_light"
-                        android:text="Sale 100 k"
+                        android:text="Sale ..."
                         android:textColor="@color/color_text_normal_black"
                         android:textSize="@dimen/text_size_14sp" />
 
@@ -144,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/value_5dp"
                         android:fontFamily="@font/roboto_light"
-                        android:text="Vat 85 k"
+                        android:text="Vat ..."
                         android:textColor="@color/color_text_normal_black"
                         android:textSize="@dimen/text_size_14sp" />
 
@@ -168,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/value_5dp"
                         android:fontFamily="@font/roboto_light"
-                        android:text="Discount 5k"
+                        android:text="Discount ..."
                         android:textColor="@color/color_text_normal_black"
                         android:textSize="@dimen/text_size_14sp" />
 
@@ -210,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/value_5dp"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Receivable 100 k"
+                    android:text="Receivable ..."
                     android:textColor="@color/color_text_normal_black"
                     android:textSize="@dimen/text_size_16sp" />
 
@@ -235,7 +236,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/value_5dp"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Paid 85 k"
+                    android:text="Paid ..."
                     android:textColor="@color/color_text_normal_black"
                     android:textSize="@dimen/text_size_16sp" />
 
@@ -259,7 +260,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/value_5dp"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Due 5k"
+                    android:text="Due ..."
                     android:textColor="@color/color_text_normal_black"
                     android:textSize="@dimen/text_size_16sp" />
 
@@ -322,6 +323,7 @@
         android:layout_marginEnd="@dimen/value_12dp"
         app:layout_constraintBottom_toTopOf="@id/guideline_2"
         app:layout_constraintEnd_toStartOf="@id/iv_options"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/guideline_1"
         app:srcCompat="@drawable/ic_graph" />
 
@@ -333,6 +335,7 @@
         android:layout_marginEnd="@dimen/value_12dp"
         app:layout_constraintBottom_toTopOf="@id/guideline_2"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/guideline_1"
         app:srcCompat="@drawable/ic_menu_dots" />
 

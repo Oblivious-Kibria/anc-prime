@@ -4,14 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.anc.ancprime.R;
-import com.github.florent37.shapeofview.shapes.CircleView;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -22,20 +22,21 @@ import butterknife.ButterKnife;
 
 
 
-public class TopCustomerListAdapter extends RecyclerView.Adapter<TopCustomerListAdapter.ViewHolder> {
+public class InventoryProductListAdapter extends RecyclerView.Adapter<InventoryProductListAdapter.ViewHolder> {
 
 
 
     private Context mContext;
     private OnItemClickListener onItemClickListener;
-    private List<Customer> mArrayList;
+    private List<String> mArrayList;
 
     private final String currencySign;
     private DecimalFormat formatter = new DecimalFormat("#,###,##0");
 
 
 
-    public TopCustomerListAdapter(Context context, List<Customer> arrayList, OnItemClickListener onItemClickListener) {
+
+    public InventoryProductListAdapter(Context context, List<String> arrayList, OnItemClickListener onItemClickListener) {
         mContext = context;
         this.mArrayList = arrayList;
         this.onItemClickListener = onItemClickListener;
@@ -48,7 +49,7 @@ public class TopCustomerListAdapter extends RecyclerView.Adapter<TopCustomerList
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_top_customer, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_inventory_list, parent, false);
         return new ViewHolder(view);
     }
 
@@ -57,9 +58,7 @@ public class TopCustomerListAdapter extends RecyclerView.Adapter<TopCustomerList
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvName.setText(mArrayList.get(position).getName());
-        holder.tvAddress.setText(mArrayList.get(position).getAddress());
-        holder.tvPurchaseValue.setText(formatter.format(mArrayList.get(position).getPurchaseValue())+" "+currencySign);
+
     }
 
 
@@ -75,19 +74,20 @@ public class TopCustomerListAdapter extends RecyclerView.Adapter<TopCustomerList
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.tv_name)
-        AppCompatTextView tvName;
-        @BindView(R.id.tv_address)
-        AppCompatTextView tvAddress;
-        @BindView(R.id.iv_profile_pic)
-        AppCompatImageView ivProfilePic;
-        @BindView(R.id.cv_profile_pic)
-        CircleView cvProfilePic;
-        @BindView(R.id.tv_purchase_value)
-        AppCompatTextView tvPurchaseValue;
-
-
-
+        @BindView(R.id.tv_product_name)
+        AppCompatTextView tvProductName;
+        @BindView(R.id.tv_unit_available)
+        AppCompatTextView tvUnitAvailable;
+        @BindView(R.id.ll_left)
+        LinearLayout llLeft;
+        @BindView(R.id.tv_price)
+        AppCompatTextView tvPrice;
+        @BindView(R.id.ll_right)
+        LinearLayout llRight;
+        @BindView(R.id.view_space)
+        View viewSpace;
+        @BindView(R.id.ll_row)
+        LinearLayoutCompat llRow;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
