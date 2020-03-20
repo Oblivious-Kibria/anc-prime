@@ -2,6 +2,7 @@ package com.anc.ancprime.data.networking;
 
 
 import com.anc.ancprime.data.model.products.ProductSummaryResponse;
+import com.anc.ancprime.data.model.salesFlow.SalesFlowSummary;
 import com.anc.ancprime.data.model.summary.SalesSummaryResponse;
 
 import io.reactivex.Observable;
@@ -42,6 +43,11 @@ public class Repository {
 
     public Observable<ProductSummaryResponse> executeTopAndLeastSellingProductRequest(String apiToken) {
         return RetrofitClient.getApiInterface(apiToken).requestTopSellingAndLeastSellingProducts();
+    }
+
+
+    public Observable<SalesFlowSummary> executeSalesFlowSummaryRequest(String apiToken) {
+        return RetrofitClient.getApiInterface(apiToken).requestSalesFlowSummary();
     }
 
 

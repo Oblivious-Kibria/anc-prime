@@ -28,6 +28,8 @@ import com.anc.ancprime.data.model.ApiResponse;
 import com.anc.ancprime.data.model.products.LeastFiveProducts;
 import com.anc.ancprime.data.model.products.ProductSummaryResponse;
 import com.anc.ancprime.data.model.products.TopFiveProducts;
+import com.anc.ancprime.data.model.salesFlow.SalesData;
+import com.anc.ancprime.data.model.salesFlow.SalesFlowSummary;
 import com.anc.ancprime.data.model.summary.LastDay;
 import com.anc.ancprime.data.model.summary.LastMonth;
 import com.anc.ancprime.data.model.summary.LastWeek;
@@ -72,8 +74,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AppCompatImageView ivOptions;
     @BindView(R.id.guideline_2)
     Guideline guideline2;
-    @BindView(R.id.sales_report_line_chart)
-    LineChart salesReportLineChart;
+    @BindView(R.id.sales_flow_line_chart)
+    LineChart salesFlowLineChart;
     @BindView(R.id.top_selling_product_chart)
     BarChart topSellingProductChart;
     @BindView(R.id.least_selling_product_chart)
@@ -135,11 +135,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayoutCompat llCashDue;
 
 
-    private LineChart mSalesReportChart;
     private MainActivityViewModel viewModel;
     private SummaryChartData summaryChartData;
-
-
 
 
     @Override
@@ -155,21 +152,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    private void intiView() {
+        initDrawerLayout();
+        initSalesFlowChart();
+        initAdapter();
+        initSpinner();
+    }
 
 
     private void initViewModel() {
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         viewModel.loadSalesSummary();
         viewModel.loadProductSummary();
+        viewModel.loadSalesFlowSummary();
         viewModel.getSalesSummaryResponse().observe(this, apiResponse -> {
             consumeResponse(apiResponse);
         });
         viewModel.getProductSummaryResponse().observe(this, apiResponse -> {
             consumeResponse(apiResponse);
         });
+        viewModel.getSalesFlowSummaryResponse().observe(this, apiResponse -> {
+            consumeResponse(apiResponse);
+        });
     }
-
-
 
 
     private void initListeners() {
@@ -177,8 +182,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         llCustomer.setOnClickListener(this);
         llCashDue.setOnClickListener(this);
     }
-
-
 
 
     private void consumeResponse(ApiResponse apiResponse) {
@@ -219,6 +222,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Toast.makeText(this, productSummaryResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         break;
+
+
+                    case AppConstants.REQUEST_TYPE_SALES_FLOW_SUMMARY:
+                        SalesFlowSummary salesFlowSummary = (SalesFlowSummary) apiResponse.data;
+                        if (salesFlowSummary != null && salesFlowSummary.getStatus()) {
+                            if (salesFlowSummary.getData() != null && salesFlowSummary.getData().size() > 0) {
+                                setSalesFlowData(salesFlowSummary.getData());
+                            }
+                        } else if (salesFlowSummary != null) {
+                            Toast.makeText(this, productSummaryResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        break;
                 }
                 break;
 
@@ -233,8 +248,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-
-
 
 
     private void setPieChartData(MyPieChartData myPieChartData, String category) {
@@ -300,18 +313,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
-    private void intiView() {
-        initDrawerLayout();
-        setSalesReportChart();
-        initAdapter();
-        initSpinner();
-    }
-
-
-
-
     private void initDrawerLayout() {
         drawerLayout.setScrimColor(getResources().getColor(R.color.color_trim));
 
@@ -328,8 +329,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         ivDrawerMenu.setOnClickListener(view -> drawerLayout.openDrawer(Gravity.LEFT));
     }
-
-
 
 
     private void initSpinner() {
@@ -354,70 +353,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
-    private void setSalesReportChart() {
-        mSalesReportChart = findViewById(R.id.sales_report_line_chart);
-
+    /***
+     * To show monthly sales data in line graph;
+     */
+    private void initSalesFlowChart() {
         {
-            mSalesReportChart.setBackgroundColor(Color.WHITE);
-            mSalesReportChart.getDescription().setEnabled(false);
-            mSalesReportChart.setTouchEnabled(true);
-            mSalesReportChart.setDrawGridBackground(false);
-            mSalesReportChart.getAxisLeft().setDrawGridLines(false);
-            mSalesReportChart.getXAxis().setDrawGridLines(false);
-            mSalesReportChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+            salesFlowLineChart.setBackgroundColor(Color.WHITE);
+            salesFlowLineChart.getDescription().setEnabled(false);
+            salesFlowLineChart.setTouchEnabled(true);
+            salesFlowLineChart.setDrawGridBackground(false);
+            salesFlowLineChart.getAxisLeft().setDrawGridLines(false);
+            salesFlowLineChart.getXAxis().setDrawGridLines(false);
+            salesFlowLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
-            mSalesReportChart.setDragEnabled(true);
-            mSalesReportChart.setScaleEnabled(true);
-            mSalesReportChart.setPinchZoom(true);
+            salesFlowLineChart.setDragEnabled(true);
+            salesFlowLineChart.setScaleEnabled(true);
+            salesFlowLineChart.setPinchZoom(true);
         }
 
         XAxis xAxis;
         {
-            xAxis = mSalesReportChart.getXAxis();
+            xAxis = salesFlowLineChart.getXAxis();
             xAxis.disableAxisLineDashedLine();
             xAxis.disableGridDashedLine();
         }
 
         YAxis yAxis;
         {
-            yAxis = mSalesReportChart.getAxisLeft();
-            mSalesReportChart.getAxisRight().setEnabled(false);
+            yAxis = salesFlowLineChart.getAxisLeft();
+            salesFlowLineChart.getAxisRight().setEnabled(false);
             yAxis.setAxisMaximum(500000f);
             yAxis.setAxisMinimum(0f);
             yAxis.setValueFormatter(new LargeValueFormatter());
         }
 
 
-        setSalesReportData(12, 500000);
-        mSalesReportChart.animateX(500);
-        Legend l = mSalesReportChart.getLegend();
+        salesFlowLineChart.animateX(500);
+        Legend l = salesFlowLineChart.getLegend();
         l.setForm(Legend.LegendForm.LINE);
     }
 
 
+    /***
+     * To set data of monthly sales in line graph after network call successful;
+     */
+    private void setSalesFlowData(List<SalesData> salesDataList) {
+        int count = salesDataList.size();
 
-
-    private void setSalesReportData(int count, float range) {
 
         ArrayList<Entry> values = new ArrayList<>();
 
         for (int i = 0; i < count; i++) {
-
-            float val = (float) (Math.random() * range);
+            float val = salesDataList.get(i).getTotalAmount();
             values.add(new Entry(i, val, null));
         }
 
         LineDataSet set1;
 
-        if (mSalesReportChart.getData() != null &&
-                mSalesReportChart.getData().getDataSetCount() > 0) {
-            set1 = (LineDataSet) mSalesReportChart.getData().getDataSetByIndex(0);
+        if (salesFlowLineChart.getData() != null &&
+                salesFlowLineChart.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet) salesFlowLineChart.getData().getDataSetByIndex(0);
             set1.setValues(values);
             set1.notifyDataSetChanged();
-            mSalesReportChart.getData().notifyDataChanged();
-            mSalesReportChart.notifyDataSetChanged();
+            salesFlowLineChart.getData().notifyDataChanged();
+            salesFlowLineChart.notifyDataSetChanged();
         } else {
 
             set1 = new LineDataSet(values, null);
@@ -443,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             set1.setFillFormatter(new IFillFormatter() {
                 @Override
                 public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-                    return mSalesReportChart.getAxisLeft().getAxisMinimum();
+                    return salesFlowLineChart.getAxisLeft().getAxisMinimum();
                 }
             });
 
@@ -455,14 +454,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             LineData data = new LineData(dataSets);
-            mSalesReportChart.setData(data);
-            mSalesReportChart.getXAxis().setValueFormatter(new MyXAxisValueFormatter());
-            mSalesReportChart.getXAxis().setGranularity(1f);
-            mSalesReportChart.getXAxis().setTextColor(getResources().getColor(R.color.color_text_light_gray_1));
-            mSalesReportChart.getAxisLeft().setTextColor(getResources().getColor(R.color.color_text_light_gray_1));
+            salesFlowLineChart.setData(data);
+            salesFlowLineChart.getXAxis().setValueFormatter(new MyXAxisValueFormatter());
+            salesFlowLineChart.getXAxis().setGranularity(1f);
+            salesFlowLineChart.getXAxis().setTextColor(getResources().getColor(R.color.color_text_light_gray_1));
+            salesFlowLineChart.getAxisLeft().setTextColor(getResources().getColor(R.color.color_text_light_gray_1));
 
 
-            List<ILineDataSet> sets = mSalesReportChart.getData()
+            List<ILineDataSet> sets = salesFlowLineChart.getData()
                     .getDataSets();
 
             for (ILineDataSet iSet : sets) {
@@ -472,15 +471,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         ? LineDataSet.Mode.LINEAR
                         : LineDataSet.Mode.CUBIC_BEZIER);
             }
-            mSalesReportChart.invalidate();
+            salesFlowLineChart.invalidate();
         }
-
 
     }
 
 
-
-
+    /***
+     * To set data of five top selling products after network call successful;
+     */
     private void setTopSellingProducts(List<TopFiveProducts> topFiveProductList) {
         topSellingProductChart.setDrawBarShadow(false);
         topSellingProductChart.setDrawValueAboveBar(true);
@@ -570,8 +569,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
+    /***
+     * To set data of five least selling products after network call successful;
+     */
     private void setLeastSellingProducts(List<LeastFiveProducts> leastFiveProductList) {
         leastSellingProductChart.setDrawBarShadow(false);
         leastSellingProductChart.setDrawValueAboveBar(true);
@@ -662,8 +662,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-
     private void initAdapter() {
         RecyclerView recyclerView = findViewById(R.id.rv_order_status);
         List<Customer> mArrayList = new ArrayList<>();
@@ -684,8 +682,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
     }
-
-
 
 
     @Override

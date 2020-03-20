@@ -37,7 +37,7 @@
 
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/sales_report_line_chart"
+        android:id="@+id/sales_flow_line_chart"
         android:layout_width="match_parent"
         android:layout_height="@dimen/values_240dp"
         android:layout_marginStart="@dimen/value_10dp"

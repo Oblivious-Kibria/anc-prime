@@ -16,8 +16,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 
-
-
 /**
  * Created by User on 3/15/2020.
  */
@@ -29,8 +27,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     private String apiToken;
     private MutableLiveData<ApiResponse> salesSummaryMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<ApiResponse> productSummaryMutableLiveData = new MutableLiveData<>();
-
-
+    private MutableLiveData<ApiResponse> salesFlowSummaryMutableLiveData = new MutableLiveData<>();
 
 
     public MainActivityViewModel(Application application) {
@@ -38,8 +35,6 @@ public class MainActivityViewModel extends AndroidViewModel {
         repository = Repository.getRepositoryInstance();
         apiToken = application.getString(R.string.api_token);
     }
-
-
 
 
     public void loadSalesSummary() {
@@ -61,8 +56,6 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
 
-
-
     public void loadProductSummary() {
         Log.d("ApiTesting", " ApiToken " + apiToken);
         disposable.add(repository.executeTopAndLeastSellingProductRequest(apiToken)
@@ -82,6 +75,23 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
 
+    public void loadSalesFlowSummary() {
+        Log.d("ApiTesting", " ApiToken " + apiToken);
+        disposable.add(repository.executeSalesFlowSummaryRequest(apiToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable1 -> salesFlowSummaryMutableLiveData.setValue(ApiResponse.loading(AppConstants.REQUEST_TYPE_SALES_FLOW_SUMMARY)))
+                .subscribe(
+                        response -> {
+                            Log.d("ApiTesting", "onSuccess " + response.getMessage());
+                            salesFlowSummaryMutableLiveData.setValue(ApiResponse.success(response, AppConstants.REQUEST_TYPE_SALES_FLOW_SUMMARY));
+                        },
+                        throwable -> {
+                            Log.d("ApiTesting", "onError " + throwable.toString());
+                            salesFlowSummaryMutableLiveData.setValue(ApiResponse.error(throwable, AppConstants.REQUEST_TYPE_SALES_FLOW_SUMMARY));
+                        }
+                ));
+    }
 
 
     public MutableLiveData<ApiResponse> getSalesSummaryResponse() {
@@ -89,13 +99,14 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
 
-
-
     public MutableLiveData<ApiResponse> getProductSummaryResponse() {
         return productSummaryMutableLiveData;
     }
 
 
+    public MutableLiveData<ApiResponse> getSalesFlowSummaryResponse() {
+        return salesFlowSummaryMutableLiveData;
+    }
 
 
     @Override
