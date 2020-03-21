@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 
 
-public class CustomerListActivity extends AppCompatActivity {
+public class CustomerListActivity extends BaseActivity {
 
 
     @BindView(R.id.tv_title)
@@ -36,11 +36,19 @@ public class CustomerListActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_list);
         ButterKnife.bind(this);
+
+        initView();
+    }
+
+    private void initView() {
+        setToolbar(toolbar);
+
     }
 
 }

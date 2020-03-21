@@ -1,7 +1,10 @@
 package com.anc.ancprime.views.utils;
 
+import com.anc.ancprime.data.model.salesFlow.SalesData;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+
+import java.util.List;
 
 
 
@@ -11,44 +14,63 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
  */
 public class MyXAxisValueFormatter extends ValueFormatter {
 
+    private List<SalesData> salesDataList;
+
+
+
+
+    public MyXAxisValueFormatter(List<SalesData> salesDataList) {
+        this.salesDataList = salesDataList;
+    }
+
+
+
+
     @Override
     public String getAxisLabel(float value, AxisBase axis) {
+        int index =  (int) value;
+        String result = getMonthName(salesDataList.get(index).getMonth());
+        return result;
+    }
+
+
+    private String getMonthName(int value){
         String result = "";
-        switch ((int)value){
-            case 0:
+        switch (value) {
+            case 1:
                 result = "Jan";
                 break;
-            case 1:
+            case 2:
                 result = "Feb";
                 break;
-            case 2:
+            case 3:
                 result = "Mar";
                 break;
-            case 3:
+            case 4:
                 result = "Apr";
                 break;
-            case 4:
+            case 5:
                 result = "May";
                 break;
-            case 5:
+            case 6:
                 result = "Jun";
                 break;
-            case 6:
+            case 7:
                 result = "July";
                 break;
-            case 7:
+            case 8:
                 result = "Aug";
                 break;
-            case 8:
+            case 9:
                 result = "Sep";
                 break;
-            case 9:
+            case 10:
                 result = "Oct";
                 break;
-            case 10:
+            case 11:
                 result = "Nov";
                 break;
-            case 11:
+            case 12:
                 result = "Dec";
                 break;
 

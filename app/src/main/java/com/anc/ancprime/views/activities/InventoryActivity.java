@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.widget.ContentLoadingProgressBar;
@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 
 
 
-public class InventoryActivity extends AppCompatActivity implements View.OnClickListener {
+public class InventoryActivity extends BaseActivity implements View.OnClickListener {
 
 
     @BindView(R.id.titleA)
@@ -64,6 +64,10 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
     ContentLoadingProgressBar progressCircular;
     @BindView(R.id.include_esp_profile_layout)
     RelativeLayout includeEmptyLayout;
+    @BindView(R.id.tv_title)
+    AppCompatTextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private InventoryProductListAdapter mAdapter;
     private List<String> mArrayList = new ArrayList<>();
@@ -86,6 +90,7 @@ public class InventoryActivity extends AppCompatActivity implements View.OnClick
 
 
     private void initView() {
+        setToolbar(toolbar);
         initAdapter();
     }
 

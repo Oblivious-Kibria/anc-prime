@@ -74,6 +74,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -139,6 +141,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SummaryChartData summaryChartData;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,12 +156,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+
     private void intiView() {
         initDrawerLayout();
         initSalesFlowChart();
         initAdapter();
         initSpinner();
     }
+
+
 
 
     private void initViewModel() {
@@ -177,11 +185,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+
     private void initListeners() {
         llInventory.setOnClickListener(this);
         llCustomer.setOnClickListener(this);
         llCashDue.setOnClickListener(this);
     }
+
+
 
 
     private void consumeResponse(ApiResponse apiResponse) {
@@ -231,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 setSalesFlowData(salesFlowSummary.getData());
                             }
                         } else if (salesFlowSummary != null) {
-                            Toast.makeText(this, productSummaryResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, salesFlowSummary.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
@@ -248,6 +260,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
+
+
 
 
     private void setPieChartData(MyPieChartData myPieChartData, String category) {
@@ -313,6 +327,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+
     private void initDrawerLayout() {
         drawerLayout.setScrimColor(getResources().getColor(R.color.color_trim));
 
@@ -329,6 +345,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         ivDrawerMenu.setOnClickListener(view -> drawerLayout.openDrawer(Gravity.LEFT));
     }
+
+
 
 
     private void initSpinner() {
@@ -353,6 +371,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+
     /***
      * To show monthly sales data in line graph;
      */
@@ -371,6 +391,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             salesFlowLineChart.setPinchZoom(true);
         }
 
+
+    }
+
+
+
+
+    /***
+     * To set data of monthly sales in line graph after network call successful;
+     */
+    private void setSalesFlowData(List<SalesData> salesDataList) {
+
         XAxis xAxis;
         {
             xAxis = salesFlowLineChart.getXAxis();
@@ -382,7 +413,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             yAxis = salesFlowLineChart.getAxisLeft();
             salesFlowLineChart.getAxisRight().setEnabled(false);
-            yAxis.setAxisMaximum(500000f);
+            yAxis.setAxisMaximum(2500f);
             yAxis.setAxisMinimum(0f);
             yAxis.setValueFormatter(new LargeValueFormatter());
         }
@@ -391,13 +422,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         salesFlowLineChart.animateX(500);
         Legend l = salesFlowLineChart.getLegend();
         l.setForm(Legend.LegendForm.LINE);
-    }
 
 
-    /***
-     * To set data of monthly sales in line graph after network call successful;
-     */
-    private void setSalesFlowData(List<SalesData> salesDataList) {
         int count = salesDataList.size();
 
 
@@ -455,7 +481,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             LineData data = new LineData(dataSets);
             salesFlowLineChart.setData(data);
-            salesFlowLineChart.getXAxis().setValueFormatter(new MyXAxisValueFormatter());
+            salesFlowLineChart.getXAxis().setValueFormatter(new MyXAxisValueFormatter(salesDataList));
             salesFlowLineChart.getXAxis().setGranularity(1f);
             salesFlowLineChart.getXAxis().setTextColor(getResources().getColor(R.color.color_text_light_gray_1));
             salesFlowLineChart.getAxisLeft().setTextColor(getResources().getColor(R.color.color_text_light_gray_1));
@@ -473,8 +499,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             salesFlowLineChart.invalidate();
         }
-
     }
+
+
 
 
     /***
@@ -567,6 +594,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         topSellingProductChart.invalidate();
     }
+
+
 
 
     /***
@@ -662,6 +691,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+
     private void initAdapter() {
         RecyclerView recyclerView = findViewById(R.id.rv_order_status);
         List<Customer> mArrayList = new ArrayList<>();
@@ -682,6 +713,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(mAdapter);
     }
+
+
 
 
     @Override
