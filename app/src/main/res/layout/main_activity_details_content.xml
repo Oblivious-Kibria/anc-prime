@@ -36,12 +36,28 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/sales_flow_line_chart"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/values_240dp"
-        android:layout_marginStart="@dimen/value_10dp"
-        android:layout_marginEnd="@dimen/value_10dp" />
+        android:layout_height="@dimen/values_240dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/sales_flow_line_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:layout_marginEnd="@dimen/value_10dp" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_circular_2"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/value_50dp"
+            android:layout_height="@dimen/value_50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -73,12 +89,28 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/top_selling_product_chart"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/values_240dp"
-        android:layout_marginStart="@dimen/value_10dp"
-        android:layout_marginEnd="@dimen/value_10dp" />
+        android:layout_height="@dimen/values_240dp">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/top_selling_product_chart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/values_240dp"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:layout_marginEnd="@dimen/value_10dp" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_circular_3"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/value_50dp"
+            android:layout_height="@dimen/value_50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -110,12 +142,28 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/least_selling_product_chart"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/values_240dp"
-        android:layout_marginStart="@dimen/value_10dp"
-        android:layout_marginEnd="@dimen/value_10dp" />
+        android:layout_height="@dimen/values_240dp">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/least_selling_product_chart"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/values_240dp"
+            android:layout_marginStart="@dimen/value_10dp"
+            android:layout_marginEnd="@dimen/value_10dp" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_circular_4"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/value_50dp"
+            android:layout_height="@dimen/value_50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone" />
+
+    </RelativeLayout>
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -130,10 +178,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/value_20dp"
             android:fontFamily="@font/roboto_light"
-            android:textStyle="bold"
             android:text="Top Customers"
             android:textColor="@color/color_text_normal_black"
-            android:textSize="@dimen/value_20dp" />
+            android:textSize="@dimen/value_20dp"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
@@ -147,17 +195,34 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_order_status"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/value_30dp"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:paddingStart="@dimen/value_15dp"
-        android:paddingEnd="@dimen/value_20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="12"
-        tools:listitem="@layout/item_top_customer" />
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_order_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/value_30dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/value_15dp"
+            android:paddingEnd="@dimen/value_20dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="12"
+            tools:listitem="@layout/item_top_customer" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_circular_5"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/value_50dp"
+            android:layout_height="@dimen/value_50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

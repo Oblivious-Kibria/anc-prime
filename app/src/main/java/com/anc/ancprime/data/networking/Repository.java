@@ -46,9 +46,17 @@ public class Repository {
     }
 
 
+
+
     public Observable<SalesFlowSummary> executeSalesFlowSummaryRequest(String apiToken) {
         return RetrofitClient.getApiInterface(apiToken).requestSalesFlowSummary();
     }
 
+
+
+
+    public Observable<SalesFlowSummary> executeTopCustomersRequest(String apiToken) {
+        return RetrofitClient.getApiInterface(apiToken).requestTopCustomers();
+    }
 
 }

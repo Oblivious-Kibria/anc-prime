@@ -7,6 +7,19 @@
     app:layoutDescription="@xml/main_activity_motion_scene">
 
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_circular_1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="@dimen/value_50dp"
+        android:layout_height="@dimen/value_50dp"
+        android:indeterminateTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/guideline_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/include_layout_dashboard"
         android:layout_width="@dimen/value_0dp"

@@ -7,6 +7,7 @@ public class AppConstants {
     public static final String REQUEST_TYPE_SALES_SUMMARY = "sales_summary";
     public static final String REQUEST_TYPE_PRODUCT_SUMMARY = "product_summary";
     public static final String REQUEST_TYPE_SALES_FLOW_SUMMARY = "sales_flow_summary";
+    public static final String REQUEST_TYPE_TOP_CUSTOMERS = "top_customers";
 
 
 

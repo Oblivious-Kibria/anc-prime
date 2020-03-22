@@ -16,6 +16,7 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.widget.Guideline;
 import androidx.core.content.ContextCompat;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.core.widget.NestedScrollView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProviders;
@@ -135,6 +136,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayoutCompat llCustomer;
     @BindView(R.id.ll_cash_due)
     LinearLayoutCompat llCashDue;
+    @BindView(R.id.progress_circular_1)
+    ContentLoadingProgressBar progressCircular1;
+    @BindView(R.id.progress_circular_2)
+    ContentLoadingProgressBar progressCircular2;
+    @BindView(R.id.progress_circular_3)
+    ContentLoadingProgressBar progressCircular3;
+    @BindView(R.id.progress_circular_4)
+    ContentLoadingProgressBar progressCircular4;
+    @BindView(R.id.progress_circular_5)
+    ContentLoadingProgressBar progressCircular5;
 
 
     private MainActivityViewModel viewModel;
@@ -201,7 +212,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (apiResponse.status) {
 
             case LOADING:
-                //showProgressBar();
+                switch (apiResponse.requestType) {
+                    case AppConstants.REQUEST_TYPE_SALES_SUMMARY:
+                        progressCircular1.show();
+                        break;
+                    case AppConstants.REQUEST_TYPE_SALES_FLOW_SUMMARY:
+                        progressCircular2.show();
+                        break;
+                    case AppConstants.REQUEST_TYPE_PRODUCT_SUMMARY:
+                        progressCircular3.show();
+                        progressCircular4.show();
+                        break;
+                    case AppConstants.REQUEST_TYPE_TOP_CUSTOMERS:
+                        progressCircular5.show();
+                        break;
+                }
                 break;
 
 
@@ -251,8 +276,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case ERROR:
-                //hideProgressBar();
-                Toast.makeText(getApplicationContext(), "Network error happens!", Toast.LENGTH_SHORT).show();
+                switch (apiResponse.requestType) {
+                    case AppConstants.REQUEST_TYPE_SALES_SUMMARY:
+                        progressCircular1.hide();
+                        break;
+                    case AppConstants.REQUEST_TYPE_SALES_FLOW_SUMMARY:
+                        progressCircular2.hide();
+                        break;
+                    case AppConstants.REQUEST_TYPE_PRODUCT_SUMMARY:
+                        progressCircular3.hide();
+                        progressCircular4.hide();
+                        break;
+                    case AppConstants.REQUEST_TYPE_TOP_CUSTOMERS:
+                        progressCircular5.hide();
+                        break;
+                }
                 break;
 
             default:

@@ -7,6 +7,19 @@
     app:layoutDescription="@xml/main_activity_motion_scene">
 
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress_circular_1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="@dimen/value_50dp"
+        android:layout_height="@dimen/value_50dp"
+        android:indeterminateTint="@color/colorPrimary"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/guideline_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/include_layout_dashboard"
         android:layout_width="@dimen/value_0dp"
@@ -31,10 +44,10 @@
                 android:layout_marginTop="@dimen/value_25dp"
                 android:layout_toStartOf="@+id/power_spinner"
                 android:fontFamily="@font/roboto_light"
-                android:textStyle="bold"
                 android:text="Sales Summary"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_size_24sp" />
+                android:textSize="@dimen/text_size_24sp"
+                android:textStyle="bold" />
 
             <com.skydoves.powerspinner.PowerSpinnerView
                 android:id="@+id/power_spinner"
@@ -282,11 +295,11 @@
         android:id="@+id/toolbar_shadow_view"
         android:layout_width="@dimen/value_0dp"
         android:layout_height="@dimen/value_1dp"
-        android:background="@drawable/tool_bar_shadow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:alpha="0"
-        app:layout_constraintTop_toBottomOf="@id/guideline_2"/>
+        android:background="@drawable/tool_bar_shadow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_2" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -294,9 +307,9 @@
         android:layout_width="@dimen/value_24dp"
         android:layout_height="@dimen/value_24dp"
         android:layout_marginStart="@dimen/value_16dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@id/guideline_2"
         app:layout_constraintStart_toStartOf="parent"
-        android:scaleType="centerCrop"
         app:layout_constraintTop_toBottomOf="@id/guideline_1"
         app:srcCompat="@drawable/ic_menu" />
 
@@ -321,9 +334,9 @@
         android:layout_width="@dimen/value_24dp"
         android:layout_height="@dimen/value_24dp"
         android:layout_marginEnd="@dimen/value_12dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/guideline_2"
         app:layout_constraintEnd_toStartOf="@id/iv_options"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/guideline_1"
         app:srcCompat="@drawable/ic_graph" />
 
@@ -333,9 +346,9 @@
         android:layout_width="@dimen/value_16dp"
         android:layout_height="@dimen/value_16dp"
         android:layout_marginEnd="@dimen/value_12dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/guideline_2"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/guideline_1"
         app:srcCompat="@drawable/ic_menu_dots" />
 
