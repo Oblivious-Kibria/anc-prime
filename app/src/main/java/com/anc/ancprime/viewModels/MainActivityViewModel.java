@@ -28,6 +28,7 @@ public class MainActivityViewModel extends AndroidViewModel {
     private MutableLiveData<ApiResponse> salesSummaryMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<ApiResponse> productSummaryMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<ApiResponse> salesFlowSummaryMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<ApiResponse> topCustomersMutableLiveData = new MutableLiveData<>();
 
 
     public MainActivityViewModel(Application application) {
@@ -94,6 +95,25 @@ public class MainActivityViewModel extends AndroidViewModel {
     }
 
 
+    public void loadTopCustomers() {
+        Log.d("ApiTesting", " ApiToken " + apiToken);
+        disposable.add(repository.executeTopCustomersRequest(apiToken)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(disposable1 -> topCustomersMutableLiveData.setValue(ApiResponse.loading(AppConstants.REQUEST_TYPE_TOP_CUSTOMERS)))
+                .subscribe(
+                        response -> {
+                            Log.d("ApiTesting", "onSuccess " + response.getMessage());
+                            topCustomersMutableLiveData.setValue(ApiResponse.success(response, AppConstants.REQUEST_TYPE_TOP_CUSTOMERS));
+                        },
+                        throwable -> {
+                            Log.d("ApiTesting", "onError " + throwable.toString());
+                            topCustomersMutableLiveData.setValue(ApiResponse.error(throwable, AppConstants.REQUEST_TYPE_TOP_CUSTOMERS));
+                        }
+                ));
+    }
+
+
     public MutableLiveData<ApiResponse> getSalesSummaryResponse() {
         return salesSummaryMutableLiveData;
     }
@@ -106,6 +126,10 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public MutableLiveData<ApiResponse> getSalesFlowSummaryResponse() {
         return salesFlowSummaryMutableLiveData;
+    }
+
+    public MutableLiveData<ApiResponse> getTopCustomersResponse() {
+        return topCustomersMutableLiveData;
     }
 
 

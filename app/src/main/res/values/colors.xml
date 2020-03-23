@@ -22,7 +22,9 @@
     <color name="color_border_bg_lite_gray">#CCCCCC</color>
     <color name="color_ash_bg">#cccccc</color>
     <color name="color_vertical_border_light_green">#B5FDCB</color>
-    <color name="color_vertical_border_deep_green">#53CA77</color>
+    <color name="color_vertical_border_deep_green">#0EE32B</color>
+    <color name="color_vertical_border_light_red">#FBAFAF</color>
+    <color name="color_vertical_border_deep_red">#F83F3F</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_grey">#a9a9a9</color>
     <color name="color_lite_white">#ECEBEB</color>

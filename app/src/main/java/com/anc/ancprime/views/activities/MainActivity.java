@@ -26,6 +26,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.anc.ancprime.R;
 import com.anc.ancprime.data.constants.AppConstants;
 import com.anc.ancprime.data.model.ApiResponse;
+import com.anc.ancprime.data.model.customer.CustomerData;
+import com.anc.ancprime.data.model.customer.TopCustomersResponse;
 import com.anc.ancprime.data.model.products.LeastFiveProducts;
 import com.anc.ancprime.data.model.products.ProductSummaryResponse;
 import com.anc.ancprime.data.model.products.TopFiveProducts;
@@ -38,7 +40,6 @@ import com.anc.ancprime.data.model.summary.MyPieChartData;
 import com.anc.ancprime.data.model.summary.SalesSummaryResponse;
 import com.anc.ancprime.data.model.summary.SummaryChartData;
 import com.anc.ancprime.viewModels.MainActivityViewModel;
-import com.anc.ancprime.views.adapters.Customer;
 import com.anc.ancprime.views.adapters.TopCustomerListAdapter;
 import com.anc.ancprime.views.utils.MyNumberFormatter;
 import com.anc.ancprime.views.utils.MyXAxisValueFormatter;
@@ -79,7 +80,6 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
     @BindView(R.id.tv_sales_summary)
     AppCompatTextView tvSalesSummary;
     @BindView(R.id.power_spinner)
@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BarChart topSellingProductChart;
     @BindView(R.id.least_selling_product_chart)
     BarChart leastSellingProductChart;
-    @BindView(R.id.rv_order_status)
-    RecyclerView rvOrderStatus;
+    @BindView(R.id.rv_customers)
+    RecyclerView rvCustomers;
     @BindView(R.id.rl_details_view)
     NestedScrollView rlDetailsView;
     @BindView(R.id.content)
@@ -150,7 +150,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private MainActivityViewModel viewModel;
     private SummaryChartData summaryChartData;
-
+    private TopCustomerListAdapter mAdapter;
+    private List<CustomerData> mArrayList = new ArrayList<>();
 
 
 
@@ -184,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewModel.loadSalesSummary();
         viewModel.loadProductSummary();
         viewModel.loadSalesFlowSummary();
+        viewModel.loadTopCustomers();
         viewModel.getSalesSummaryResponse().observe(this, apiResponse -> {
             consumeResponse(apiResponse);
         });
@@ -191,6 +193,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             consumeResponse(apiResponse);
         });
         viewModel.getSalesFlowSummaryResponse().observe(this, apiResponse -> {
+            consumeResponse(apiResponse);
+        });
+        viewModel.getTopCustomersResponse().observe(this, apiResponse -> {
             consumeResponse(apiResponse);
         });
     }
@@ -269,6 +274,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             }
                         } else if (salesFlowSummary != null) {
                             Toast.makeText(this, salesFlowSummary.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+
+                    case AppConstants.REQUEST_TYPE_TOP_CUSTOMERS:
+                        TopCustomersResponse topCustomersResponse = (TopCustomersResponse) apiResponse.data;
+                        if (topCustomersResponse != null && topCustomersResponse.getStatus()) {
+                            if (topCustomersResponse.getData() != null && topCustomersResponse.getData().size() > 0) {
+                                mArrayList.clear();
+                                mArrayList.addAll(topCustomersResponse.getData());
+                                mAdapter.notifyDataSetChanged();
+                            }
+                        } else if (topCustomersResponse != null) {
+                            Toast.makeText(this, topCustomersResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
@@ -609,7 +628,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             set1.setDrawIcons(false);
 
-            int startColor = ContextCompat.getColor(this, R.color.color_green);
+            int startColor = ContextCompat.getColor(this, R.color.color_vertical_border_deep_green);
             int endColor = ContextCompat.getColor(this, R.color.color_vertical_border_light_green);
 
 
@@ -704,8 +723,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             set1.setDrawIcons(false);
 
-            int startColor = ContextCompat.getColor(this, R.color.color_green);
-            int endColor = ContextCompat.getColor(this, R.color.color_vertical_border_light_green);
+            int startColor = ContextCompat.getColor(this, R.color.color_vertical_border_deep_red);
+            int endColor = ContextCompat.getColor(this, R.color.color_vertical_border_light_red);
 
 
             List<Fill> gradientFills = new ArrayList<>();
@@ -732,24 +751,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initAdapter() {
-        RecyclerView recyclerView = findViewById(R.id.rv_order_status);
-        List<Customer> mArrayList = new ArrayList<>();
-        mArrayList.add(new Customer("United Hospital", "", "Gulshan", 90000));
-        mArrayList.add(new Customer("Apollo Hospitals", "", "Gulshan", 70000));
-        mArrayList.add(new Customer("Square Hospital", "", "Panthopath", 60000));
-        mArrayList.add(new Customer("Labaid", "", "Gulshan", 50000));
-        mArrayList.add(new Customer("Ibn Sina Hospital", "", "Dhanmondi", 55000));
+        mAdapter = new TopCustomerListAdapter(getApplicationContext(), mArrayList, (view, position) -> {
 
-
-        TopCustomerListAdapter mAdapter = new TopCustomerListAdapter(getApplicationContext(), mArrayList, new TopCustomerListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-
-            }
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(mAdapter);
+        rvCustomers.setLayoutManager(layoutManager);
+        rvCustomers.setAdapter(mAdapter);
     }
 
 
@@ -772,5 +779,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
 
 }

@@ -14,11 +14,14 @@ public class HttpParams {
 
 
 
-
+    // API END POINTS;
     public static final String SALES_SUMMARY_API = "sale-summary";
     public static final String TOP_SELLING_AND_LEAST_SELLING_PRODUCT_API = "top-low-product";
     public static final String SALES_FLOW_SUMMARY_API = "sale-summary-report";
     public static final String TOP_CUSTOMERS_API = "top-customer";
 
 
+
+    // BASE PATH FOR IMAGE RESOURCES;
+    public static final String CUSTOMERS_IMAGE_BASE_URL = "http://43.225.151.253:97/assets/images/customers/";
 }

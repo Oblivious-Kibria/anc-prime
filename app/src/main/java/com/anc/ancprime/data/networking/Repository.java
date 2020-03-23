@@ -1,6 +1,7 @@
 package com.anc.ancprime.data.networking;
 
 
+import com.anc.ancprime.data.model.customer.TopCustomersResponse;
 import com.anc.ancprime.data.model.products.ProductSummaryResponse;
 import com.anc.ancprime.data.model.salesFlow.SalesFlowSummary;
 import com.anc.ancprime.data.model.summary.SalesSummaryResponse;
@@ -55,7 +56,7 @@ public class Repository {
 
 
 
-    public Observable<SalesFlowSummary> executeTopCustomersRequest(String apiToken) {
+    public Observable<TopCustomersResponse> executeTopCustomersRequest(String apiToken) {
         return RetrofitClient.getApiInterface(apiToken).requestTopCustomers();
     }
 
